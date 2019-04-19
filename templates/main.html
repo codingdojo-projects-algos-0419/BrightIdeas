@@ -37,6 +37,10 @@ form {
     margin-bottom: 10px;
 }
 
+.error{
+    color:red;
+}
+
 </style>
 <body>
     <div id="wrapper">
@@ -73,6 +77,18 @@ form {
             <input type="password" name="pword"><br><br>
             <input type="submit" value="Login" class="button">
         </form>
+        <div class="errors">
+            <br style="line-height: 200px">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li class="error">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
     </div>
 </body>
 </html>

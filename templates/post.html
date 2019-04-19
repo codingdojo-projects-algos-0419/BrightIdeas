@@ -65,12 +65,12 @@ h2 {
                 <h2><a href="/bright_ideas">Bright Ideas</a></h2>
                 <h2><a href="/logout">| Logout</a></h2>
         </div>
-        {% for post in posts %}
+
         <div class="posts">
-            <h6><a href="/user/{{ quote['user_id'] }}">{{ post['alias'] }} says:</a></h6>
-            <h6>{{ post['post'] }}</h6>
+            <h6><a href="/user/{{ post.user_id }}">{{ post['user'].alias }} says:</a></h6>
+            <h6>{{ post['content'] }}</h6>
         </div><br>
-        {% endfor %}
+
         <div class="likes_table">
             <h3>People who liked this post:</h3>
             <table>
@@ -81,15 +81,16 @@ h2 {
                     </tr>
                 </thead>
                 <tbody>
-                    {% for user in users %}
+                    {% for user in post["user_who_like_post"] %}
                         <tr>
-                            <td>{{ user['alias'] }}</td>
+                            <td><a href="/user/{{ user['id'] }}">{{ user['alias'] }}</a></td>
                             <td>{{ user['name'] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+
     </div>
 </body>
 </html>

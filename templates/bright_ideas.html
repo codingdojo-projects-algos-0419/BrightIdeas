@@ -51,42 +51,52 @@ h2 {
     background-color: white;
     padding-left: 10px;
 }
+.error{
+    color:red;
+}
 
 </style>
 <body>
     <div id="wrapper">
         <div class="header">
-            <h1>Hi {{ name }}!</h1>
+            <h1>Hi {{ user_info["name"] }}!</h1>
             <h2><a href="/logout">Logout</a></h2>
         </div><br><br><br><br><br>
         <div class="content">
             <form action="/posts/create" method="post">
-                <input type="text" name="content" value="Post something witty here..." id="" style="width:500px">
+                <input type="hidden" name="user_id" value="{{user_info['id']}}">
+                <input type="text" name="content" placeholder="Post something witty here..." id="" style="width:500px">
                 <input type="submit" value="Post!" class="button">
         </div>
-        {% for post in posts %}
-        <div class="posts">
-        <h6><a href="/user/{{ quote['user_id'] }}">{{ post['alias'] }} says:</a></h6>
-        <h6>{{ post['post'] }}</h6>
-        <h6><a href="/bright_ideas/{{ post['id'] }}/like">Like</a></h6>
-        <h6><a href="/bright_ideas/{{ post['id'] }}">{{ ??? }} people like this</a></h6>
-        {% if session['user_id'] == post['user_id'] %}
-        <h6><a href="/posts/{{ post['id'] }}/delete">Delete</a></h6> 
-        {% endif %}
-        </div><br>
-        {% endfor %}
-    </div>
-    <div class="errors">
+
+        <div class="errors">
             <br style="line-height: 200px">
             {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li class="error">{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="error">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             {% endwith %}
         </div>
+        
+        {% for post in posts|reverse %}
+            <div class="posts">
+                <h6><a href="/user/{{ post.user_id }}">{{ post["user"].alias }} says:</a></h6>
+                <h6>{{ post['content'] }}</h6>
+                <h6><a href="/bright_ideas/{{ post['id'] }}/like">Like</a></h6>
+                <h6><a href="/bright_ideas/{{ post['id'] }}">{{post["user_who_like_post"]|length}} people like this</a></h6>
+            {% if session['user_id'] == post['user_id'] %}
+                <h6><a href="/posts/{{ post['id'] }}/delete">Delete</a></h6> 
+            {% endif %}
+            </div><br>
+        {% endfor %}
+        
+    </div>
+
+    
+    
 </body>
 </html>

@@ -73,19 +73,19 @@ h2 {
                 <h2><a href="/bright_ideas">Bright Ideas</a></h2>
                 <h2><a href="/logout">| Logout</a></h2>
         </div>
-        {% for user in users %}
+
         <div class="user_info">
-            <h3>Name: {{ user['name'] }}</h3>
-            <h3>Alias: {{ user['alias'] }}</h3>
-            <h3>Email: {{ user['email'] }}</h3>
+            <h3>Name: {{ user_info['name'] }}</h3>
+            <h3>Alias: {{ user_info['alias'] }}</h3>
+            <h3>Email: {{ user_info['email'] }}</h3>
             
         </div><br>
         <div class="divider"></div><br>
-        <div class="info">
-            <h3>Total Number of Posts: {{ ??? }}</h3>
-            <h3>Total Number of Likes: {{ ??? }}</h3>
+        <div class="info">          
+            <h3>Total Number of Posts: {{ count_user_post }}</h3>
+            <h3>Total Number of Likes: {{ count_all_post_likes }}</h3>
         </div>
-        {% endfor %}
+
     </div>
 </body>
 </html>
