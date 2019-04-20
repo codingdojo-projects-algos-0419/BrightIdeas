@@ -1,4 +1,4 @@
-from config import db,func,EMAIL_REGEX,bcrypt
+from config import db,func,EMAIL_REGEX,Bcrypt
 from flask import flash
 import re
 
@@ -65,7 +65,7 @@ class User(db.Model):
 
     @classmethod
     def add_new_user(cls,user_data):
-        pw_hash = bcrypt.generate_password_hash(user_data['pword']) 
+        pw_hash = Bcrypt.generate_password_hash(user_data['pword']) 
         user_to_add = cls(name=user_data["name"],alias=user_data["alias"],email=user_data["email"],password=pw_hash)
         db.session.add(user_to_add)
         db.session.commit()
@@ -77,7 +77,7 @@ class User(db.Model):
         print("login_user:",login_user)
         is_valid = False
         if login_user:
-            if bcrypt.check_password_hash(login_user[0].password, user_data["pword"]):
+            if Bcrypt.check_password_hash(login_user[0].password, user_data["pword"]):
                 is_valid = True
                 return is_valid
         flash("You could not be logged in","error")
