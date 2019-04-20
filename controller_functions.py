@@ -29,6 +29,13 @@ def log_out():
 def bright_ideas():
     user_info = User.login_user(session["user_id"])
     all_post = Post.all_post()
+    for i in range(len(all_post)-1,1,-1):
+        for j in range(0,i-1,1):         
+            if(len(all_post[j].user_who_like_post) < len(all_post[i].user_who_like_post)):
+                temp = all_post[i]
+                all_post[i] = all_post[j]
+                all_post[j] = temp
+
     return render_template("bright_ideas.html",user_info = user_info,posts = all_post)
 
 def add_post():

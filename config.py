@@ -8,7 +8,7 @@ import re
 app = Flask(__name__)
 app.secret_key="hello world"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
-bcrypt = Bcrypt(app)
+Bcrypt = Bcrypt(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///BrightIdeas.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

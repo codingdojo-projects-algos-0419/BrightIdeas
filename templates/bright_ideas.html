@@ -82,7 +82,7 @@ h2 {
             {% endwith %}
         </div>
         
-        {% for post in posts|reverse %}
+        {% for post in posts %}
             <div class="posts">
                 <h6><a href="/user/{{ post.user_id }}">{{ post["user"].alias }} says:</a></h6>
                 <h6>{{ post['content'] }}</h6>
